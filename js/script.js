@@ -38,9 +38,28 @@ function playRound(playerSelection, computerSelection) {
       return "Tie";
     }
   }
+  else {
+    return;
+  }
 }
 
-let playerSelection = "Rock";
-let computerSelection = computerPlay();
-console.log(computerSelection);
-console.log(playRound(playerSelection,computerSelection));
+function calcScore(playRound){
+  if(playRound === "You Win! Rock Beats Scissors"||playRound === "You Win! Paper Beats Rock"||playRound === "You Win! Scissors Beats Paper"){
+    return 1;
+  }
+  else{
+    return 0;
+  }
+}
+
+function game() {
+  let score = 0;
+  for (i = 0; i < 5; i++) {
+    let playerSelection = prompt("Rock ,Paper or Scissors", "");
+    let computerSelection = computerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+    score += calcScore(playRound(playerSelection, computerSelection));
+  }
+}
+game();
+
