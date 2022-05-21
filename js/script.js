@@ -49,22 +49,26 @@ function playGame(e) {
   let playerSelection = e.target.className;
   let computerSelection = computerPlay();
   const resultText = playRound(playerSelection, computerSelection);
-  const resultDiv = document.createElement('div');
   resultDiv.textContent = resultText;
-  body.appendChild(resultDiv);
   if (resultText === "You Win! Rock Beats Scissors" || resultText === "You Win! Paper Beats Rock" || resultText === "You Win! Scissors Beats Paper") {
     playerScore += 1;
   }
   else if (resultText === "You Lose! Paper Beats Rock" || resultText === "You Lose! Scissors Beats Paper" || resultText === "You Lose! Rock Beats Scissors") {
     computerScore += 1;
   }
-  console.log(playerScore);
-  console.log(computerScore);
-
-  if (playerScore === 5 || computerScore === 5) {
+  currentScoreDiv.textContent = `PlayerScore : ${playerScore} ComputerScore : ${computerScore}`;
+  
+  if (playerScore === 5) {
     rockButton.removeEventListener('click', playGame);
     paperButton.removeEventListener('click', playGame);
     scissorsButton.removeEventListener('click', playGame);
+    winnerDiv.textContent = 'The Winner is You!!!'
+  }
+  else if(computerScore === 5) {
+    rockButton.removeEventListener('click', playGame);
+    paperButton.removeEventListener('click', playGame);
+    scissorsButton.removeEventListener('click', playGame);
+    winnerDiv.textContent = 'The Winner is Computer!!!';
   }
 }
 
@@ -73,11 +77,17 @@ const paperButton = document.querySelector('.paper');
 const scissorsButton = document.querySelector('.scissors');
 const body = document.querySelector('.body');
 
-
-
+const resultDiv = document.createElement('div');
+body.appendChild(resultDiv);
 
 let playerScore = 0;
 let computerScore = 0;
+
+const currentScoreDiv = document.createElement('div');
+body.appendChild(currentScoreDiv);
+
+const winnerDiv = document.createElement('div');
+body.appendChild(winnerDiv);
 
 rockButton.addEventListener('click', playGame);
 paperButton.addEventListener('click', playGame);
